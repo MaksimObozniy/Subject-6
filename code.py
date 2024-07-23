@@ -33,11 +33,11 @@ def resultat(password):
         has_upper_letters, 
         has_lower_letters,
         has_symbols
-        ]
+    ]
     return sum(2 for check in checks if check(password))
 
 
-def on_ask_change(new_edit_text):
+def on_ask_change(edit, new_edit_text):
     score = resultat(new_edit_text)
     reply.set_text(f"Рейтинг вашего пароля: {score}")
 
@@ -48,7 +48,6 @@ def main():
     reply = urwid.Text("Рейтинг вашего пароля: 0")
     menu = urwid.Pile([ask, reply])
     menu = urwid.Filler(menu, valign='top')
-    
     urwid.connect_signal(ask, 'change', on_ask_change)
     urwid.MainLoop(menu).run()
 
